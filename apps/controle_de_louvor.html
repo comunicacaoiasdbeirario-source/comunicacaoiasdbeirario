@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Controle de Louvor</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.7/plyr.css">
+
+<style>
+:root{
+    --primary:#00bcd4;
+    --primary-dark:#0097a7;
+    --accent:#ff9800;
+    --bg:#f4f4f4;
+    --card:#fff;
+    --text:#222;
+}
+body{margin:0;font-family:Arial;background:var(--bg);color:var(--text);transition:background 0.3s,color 0.3s}
+
+body.dark{
+    --bg:#222;
+    --card:#333;
+    --text:#f4f4f4;
+}
+
+/* HEADER */
+.header{position:fixed;top:10px;left:10px;display:flex;align-items:center;gap:12px;z-index:10}
+.header img{height:50px}
+.program-name{font-size:18px;font-weight:700;color:var(--text)}
+
+/* LINHA */
+.linha-full{width:100%;height:2px;background:var(--text);margin-top:70px}
+
+/* CONTAINER */
+.container{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin:20px;padding-bottom:80px}
+.thumbnail{border:2px solid #ccc;padding:8px;background:var(--card);width:150px;text-align:center;cursor:pointer;transition:.18s;position:relative;border-radius:8px}
+.thumbnail:hover{transform:scale(1.06)}
+.thumbnail img,.thumbnail video,.thumbnail audio{max-width:100%;max-height:100px;margin:0 auto 6px;display:block}
+.caption{font-size:12px;color:var(--text)}
+.change-btn{position:absolute;bottom:0;left:0;width:100%;background:var(--accent);color:#fff;border:none;padding:5px;font-size:12px;cursor:pointer}
+
+/* MENU FLUTUANTE DIREITA */
+.menu-floating{
+    position:fixed;
+    top:10px;
+    right:10px;
+    z-index:20;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+}
+
+.menu-icon{
+    width:40px;
+    height:40px;
+    background:var(--primary);
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.25);
+    transition:transform 0.2s;
+}
+.menu-icon:hover{transform:scale(1.1);}
+.menu-icon span.material-icons{
+    font-size:20px; /* ajusta o tamanho do ícone dentro do círculo */
+}
+.menu-panel{
+    margin-top:10px;
+    width:0;
+    max-height:0;
+    background:#fff;
+    border-radius:12px;
+    padding:0;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    align-items:flex-end;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    transition: width 0.3s, max-height 0.3s, padding 0.3s;
+}
+
+.menu-panel.open{
+    width:220px;
+    max-height:500px;
+    padding:12px;
+}
+
+.menu-panel label{
+    font-size:14px;
+    display:flex; align-items:center; gap:6px; justify-content:flex-end;
+}
+.menu-panel input{
+    width:100%; padding:6px; border-radius:4px; border:1px solid #ccc;
+}
+.menu-panel button{
+    width:100%; padding:8px; background:var(--primary); color:#fff; border:none; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;
+    font-size:14px;
+}
+.menu-panel button:hover{background:var(--primary-dark)}
+.menu-panel span.material-icons{font-size:20px;}
+</style>
+</head>
+<body>
+
+<!-- MENU FLUTUANTE DIREITA -->
+<div class="menu-floating">
+    <div class="menu-icon" onclick="toggleMenu()">
+        <span class="material-icons">settings</span>
+    </div>
+    <div class="menu-panel" id="menuPanel">
+        <label><span class="material-icons">tune</span> Limite de Thumbs:</label>
+        <input type="number" id="thumbLimit" min="1" max="100">
+        <button onclick="updateLimit()"><span class="material-icons">save</span> Salvar Limite</button>
+        <button onclick="fileInput.click()"><span class="material-icons">add_circle</span>Adicionar</button>
+        <button onclick="clearFiles()"><span class="material-icons">delete</span>Limpar</button>
+        <button onclick="logout()"><span class="material-icons">exit_to_app</span>Sair</button>
+        <button onclick="toggleTheme()"><span class="material-icons">dark_mode</span> Tema Escuro</button>
+    </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+<img src="https://tse4.mm.bing.net/th/id/OIP.NmQ4v7h2GqGw3kL_03u9IAHaHa?cb=ucfimg2&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3">
+<div class="program-name">Controle de Louvor</div>
+</div>
+
+<!-- LINHA -->
+<div class="linha-full"></div>
+
+<div class="container" id="container"></div>
+<input type="file" id="fileInput" style="display:none" accept="image/*,video/*,audio/*" onchange="handleFileUpload(event)">
+
+<script src="https://cdn.plyr.io/3.7.7/plyr.js"></script>
+<script>
+let fileCount = 0;
+let MAX_FILES = 14;
+const container = document.getElementById("container");
+const fileInput = document.getElementById("fileInput");
+const thumbInput = document.getElementById("thumbLimit");
+const menuPanel = document.getElementById("menuPanel");
+
+// Carregar limite salvo
+if(localStorage.getItem('thumbLimit')){
+    MAX_FILES = parseInt(localStorage.getItem('thumbLimit'));
+}
+thumbInput.value = MAX_FILES;
+
+// Carregar tema salvo
+if(localStorage.getItem('theme') === 'dark'){
+    document.body.classList.add('dark');
+}
+
+// Toggle menu flutuante com animação
+function toggleMenu(){
+    menuPanel.classList.toggle('open');
+}
+
+// Atualizar limite
+function updateLimit(){
+    const value = parseInt(thumbInput.value);
+    if(value >= 1 && value <= 100){
+        MAX_FILES = value;
+        localStorage.setItem('thumbLimit', MAX_FILES);
+        alert("Novo limite definido: " + MAX_FILES);
+    } else {
+        alert("Insira um valor entre 1 e 100.");
+    }
+}
+
+// Alternar tema
+function toggleTheme(){
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+}
+
+// Funções existentes
+function logout() {
+    if (confirm("Deseja realmente sair?")) {
+        window.location.href = 'https://www.adventistas.org/pt/';
+    }
+}
+function clearFiles(){
+    container.innerHTML="";
+    fileCount=0;
+    alert("Arquivos removidos com sucesso!");
+}
+function handleFileUpload(e){
+    let f=e.target.files[0];
+    if(!f) return;
+    if(fileCount>=MAX_FILES){alert("Limite de arquivo atingido!");return;}
+    createThumb(f); fileCount++; e.target.value="";
+}
+function openFile(f){
+    let url=URL.createObjectURL(f);
+    let page=`<!DOCTYPE html><html><head><meta charset='UTF-8'>
+    <style>body{margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh}video,audio,img{max-width:100%;max-height:100%}</style>
+    </head><body>
+    ${f.type.startsWith('video')?`<video id="p" src="${url}" autoplay controls playsinline muted></video>`:
+    f.type.startsWith('audio')?`<audio id="p" src="${url}" autoplay controls></audio>`:
+    `<img id="p" src="${url}">`}
+    <script>
+    let p=document.getElementById("p");
+    function fs(){try{(p.requestFullscreen||p.webkitRequestFullscreen||p.msRequestFullscreen).call(p)}catch(e){}}
+    p.addEventListener('play',fs); setTimeout(fs,600);
+    <\/script></body></html>`;
+    let w=window.open(""); w.document.write(page); w.document.close();
+}
+function createThumb(file){
+    let d=document.createElement("div"); d.className="thumbnail"; d.onclick=()=>openFile(file);
+    if(file.type.startsWith("image")){
+        let i=document.createElement("img"); i.src=URL.createObjectURL(file); d.appendChild(i);
+        d.innerHTML+=`<div class='caption'>Imagem: ${file.name}</div>`;
+    } else if(file.type.startsWith("audio")){
+        let a=document.createElement("audio"); a.controls=true; a.src=URL.createObjectURL(file); d.appendChild(a);
+        d.innerHTML+=`<div class='caption'>Áudio: ${file.name}</div>`;
+    } else if(file.type.startsWith("video")){
+        let v=document.createElement("video"); v.src=URL.createObjectURL(file); v.muted=true; v.style.maxHeight="100px"; d.appendChild(v);
+        d.innerHTML+=`<div class='caption'>Vídeo: ${file.name}</div>`;
+    } else {
+        d.innerHTML+=`<div class='caption'>Arquivo: ${file.name}</div>`;
+    }
+    let b=document.createElement("button");
+    b.className="change-btn"; b.textContent="Alterar";
+    b.onclick=e=>{
+        e.stopPropagation();
+        let inp=document.createElement("input");
+        inp.type="file"; inp.accept="image/*,video/*,audio/*";
+        inp.onchange=ev=>{
+            let nf=ev.target.files[0];
+            if(nf){container.replaceChild(createThumb(nf),d)}
+        };
+        inp.click();
+    };
+    d.appendChild(b);
+    container.appendChild(d);
+    return d;
+}
+</script>
+</body>
+</html>

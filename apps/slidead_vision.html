@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slider Show</title>
+<style>
+    /* Reset básico */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0 20px;
+        flex-direction: column;
+    }
+
+    .container {
+        max-width: 700px;
+        width: 100%;
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        color: #444;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .config {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 1rem;
+        color: #555;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        margin-bottom: 15px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        background-color: #f9f9f9;
+        font-size: 1rem;
+    }
+
+    input[type="file"] {
+        padding: 5px;
+    }
+
+    /* === Botões de Transição === */
+    .transition-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    .transition-btn {
+        flex: 1;
+        min-width: 100px;
+        padding: 10px 15px;
+        font-size: 0.95rem;
+        border: 2px solid #007bff;
+        border-radius: 8px;
+        background-color: #fff;
+        color: #007bff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        user-select: none;
+    }
+
+    .transition-btn:hover {
+        background-color: #007bff;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .transition-btn.active {
+        background-color: #007bff;
+        color: white;
+        box-shadow: 0 0 10px rgba(0,123,255,0.4);
+    }
+
+    /* === Checkbox + Botões de controle === */
+    .control-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 28px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+    }
+
+    .slider::before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    .switch input:checked + .slider {
+        background-color: #007bff;
+    }
+
+    .switch input:checked + .slider::before {
+        transform: translateX(22px);
+    }
+
+    .checkbox-group label {
+        font-weight: normal;
+        color: #555;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    /* === Botões dentro do container === */
+    .control-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .control-buttons button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: background-color 0.3s, transform 0.2s;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .control-buttons button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    .control-buttons button:active {
+        background-color: #004085;
+        transform: translateY(1px);
+    }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎥 Slider Show</h1>
+
+    <div class="config">
+        <label>Selecione até 5 imagens:</label>
+        <input type="file" id="imageInput" accept="image/*" multiple>
+
+        <label>Tipo(s) de Transição:</label>
+        <div class="transition-buttons" id="transitionButtons">
+            <button type="button" data-value="fade" class="transition-btn active">🌫️ Fade</button>
+            <button type="button" data-value="slide" class="transition-btn">➡️ Slide</button>
+            <button type="button" data-value="zoom" class="transition-btn">🔍 Zoom</button>
+            <button type="button" data-value="blur" class="transition-btn">💨 Blur</button>
+        </div>
+
+        <label for="duration">Tempo por imagem (ms):</label>
+        <input type="number" id="duration" value="3000" min="1000">
+
+        <!-- Linha combinando checkbox e botões -->
+        <div class="control-row">
+            <div class="checkbox-group">
+                <label for="showControls">Mostrar botões de controle</label>
+                <label class="switch">
+                    <input type="checkbox" id="showControls">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="control-buttons">
+                <button id="startBtn">▶️ Iniciar</button>
+                <button id="pauseBtn">⏸️ Pausar</button>
+                <button id="stopBtn">⏹️ Parar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let imageFiles = [];
+let currentSlide = 0;
+let slideInterval;
+let isPaused = false;
+let slideshowWindow = null;
+
+// Botões de transição
+const transitionButtons = document.querySelectorAll('.transition-btn');
+transitionButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+    });
+});
+
+// Transições selecionadas
+function getSelectedTransitions() {
+    return Array.from(document.querySelectorAll('.transition-btn.active'))
+        .map(btn => btn.dataset.value)
+        .join(' ');
+}
+
+// Selecionar imagens
+document.getElementById('imageInput').addEventListener('change', (event) => {
+    imageFiles = Array.from(event.target.files).slice(0, 5);
+});
+
+// Fullscreen
+function enterFullScreen(window) {
+    if (window.document.documentElement.requestFullscreen) {
+        window.document.documentElement.requestFullscreen();
+    } else if (window.document.documentElement.webkitRequestFullscreen) {
+        window.document.documentElement.webkitRequestFullscreen();
+    }
+}
+
+// Abrir slideshow
+function openSlideshow() {
+    if (imageFiles.length === 0) {
+        alert('Selecione até 5 imagens primeiro!');
+        return;
+    }
+
+    const transition = getSelectedTransitions();
+    const duration = parseInt(document.getElementById('duration').value);
+    const showControls = document.getElementById('showControls').checked;
+
+    slideshowWindow = window.open('', '_blank');
+    slideshowWindow.document.write(`
+        <html>
+        <head>
+            <title>SlideAd Vision - Exibindo...</title>
+            <style>
+                body {
+                    margin: 0;
+                    overflow: hidden;
+                    background: black;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    position: absolute;
+                    opacity: 0;
+                    transition:
+                        opacity 1s ease-in-out,
+                        transform 1s ease-in-out,
+                        filter 1s ease-in-out;
+                }
+                img.active { opacity: 1; }
+
+                img.slide { transform: translateX(100%); }
+                img.active.slide { transform: translateX(0); }
+
+                img.zoom { transform: scale(1.2); opacity: 0; }
+                img.active.zoom { transform: scale(1); opacity: 1; }
+
+                img.fade { opacity: 0; }
+                img.active.fade { opacity: 1; }
+
+                img.blur {
+                    filter: blur(15px);
+                    opacity: 0;
+                    transform: scale(1.05);
+                }
+                img.active.blur {
+                    filter: blur(0);
+                    opacity: 1;
+                    transform: scale(1);
+                }
+
+                /* === Controles no canto superior direito === */
+                .slide-controls {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    z-index: 1000;
+                }
+
+                .slide-controls button {
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    padding: 10px 20px;
+                    font-size: 0.95rem;
+                    cursor: pointer;
+                    transition: background-color 0.3s, transform 0.2s;
+                    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+                }
+
+                .slide-controls button:hover {
+                    transform: translateY(-2px);
+                }
+
+            </style>
+        </head>
+        <body>
+            ${imageFiles.map((file, i) => `
+                <img id="slide${i}" 
+                     src="${URL.createObjectURL(file)}"
+                     class="${i === 0 ? 'active' : ''} ${transition}">
+            `).join('')}
+
+            <script>
+                let current = 0;
+                let total = ${imageFiles.length};
+                let duration = ${duration};
+                let interval;
+                let isPaused = false;
+
+                function showSlide(index) {
+                    document.querySelectorAll('img').forEach((img, i) => {
+                        img.classList.remove('active');
+                        if (i === index) img.classList.add('active');
+                    });
+                }
+
+                function nextSlide() {
+                    if (!isPaused) {
+                        current = (current + 1) % total;
+                        showSlide(current);
+                    }
+                }
+
+                function start() {
+                    clearInterval(interval);
+                    interval = setInterval(nextSlide, duration);
+                }
+
+                function pause() { isPaused = !isPaused; }
+
+                function stop() {
+                    clearInterval(interval);
+                    window.close();
+                }
+
+                if (${showControls}) {
+                    const controls = document.createElement('div');
+                    controls.classList.add('slide-controls');
+                    controls.innerHTML = \`
+                        <button id="pauseBtn" style="padding:10px 20px;">⏸️ Pausar</button>
+                        <button onclick="stop()" style="padding:10px 20px;">⏹️ Parar</button>
+                    \`;
+                    document.body.appendChild(controls);
+
+                    const pauseBtn = document.getElementById('pauseBtn');
+                    pauseBtn.addEventListener('click', () => {
+                        isPaused = !isPaused;
+                        pauseBtn.textContent = isPaused ? "▶️ Retomar" : "⏸️ Pausar";
+                    });
+                }
+
+                start();
+            <\/script>
+        </body>
+        </html>
+    `);
+
+    enterFullScreen(slideshowWindow);
+}
+
+// Botões principais
+document.getElementById('startBtn').addEventListener('click', openSlideshow);
+document.getElementById('pauseBtn').addEventListener('click', () => {
+    if (slideshowWindow) {
+        slideshowWindow.isPaused = !slideshowWindow.isPaused;
+    }
+});
+document.getElementById('stopBtn').addEventListener('click', () => {
+    if (slideshowWindow) slideshowWindow.close();
+    clearInterval(slideInterval);
+    currentSlide = 0;
+});
+</script>
+
+</body>
+</html>

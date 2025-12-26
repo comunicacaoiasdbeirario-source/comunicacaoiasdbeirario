@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Momento Vida e Saúde (Cards 3 Colunas)</title>
+
+    <style>
+        /* Variáveis CSS */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --link-color: #0056b3;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            font-size: 2em;
+            text-align: center;
+        }
+
+        /* Label acessível */
+        .sr-only {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        /* Campo de Busca */
+        #search {
+            width: 100%;
+            padding: 14px 20px 14px 45px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 1em;
+            box-sizing: border-box;
+            background: var(--card-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="%23999" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>') no-repeat 15px center;
+            background-size: 20px;
+            transition: border-color 0.3s;
+        }
+
+        #search:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        /* Grid de Cards */
+        #lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        /* Card */
+        li {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            line-height: 1.5;
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Remove hover em dispositivos touch */
+        @media (hover: none) {
+            li:hover {
+                transform: none;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            display: block;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🩺 Momento Vida e Saúde</h1>
+
+        <!-- Label acessível -->
+        <label for="search" class="sr-only">Buscar vídeos por nome</label>
+        <input type="text" id="search" placeholder="🔍 Buscar vídeos por nome..." onkeyup="filtrar()">
+
+        <ul id="lista">
+            
+			<li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/01_MVS_04_05_24_SAUDE_INTEGRAL.mp4" target="_blank">1. Saúde integral: corpo, mente e espírito.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/02_MVS_11_05_24_PERDAO.mp4" target="_blank">2. Perdão.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/03_MVS_18_05_24_PEQUENOS_ATOS.mp4" target="_blank">3. O poder dos pequenos atos.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/04_MVS_25_05_24_ALIMENTACAO_VEGETAIS.mp4" target="_blank">4. Benefícios de uma alimentação à base de vegetais.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/05_MVS_TIPOS_EXERCICIO.mp4" target="_blank">5. Tipos de exercícios.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/06_MVS_COMO_FORTALECER_IMUNIDADE.mp4" target="_blank">6. Como ter uma imunidade eficiente.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/07_MVS_BAGAGEM_EMOCIONAL.mp4" target="_blank">7. Problemas familiares.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/08_MVS_OS_DESAFIOS_QUE_A_DOENCA_TRAZ.mp4" target="_blank">8. Doença, uma oportunidade?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/09_MVS_POR_ONDE_COMECAR.mp4" target="_blank">9. Como começar a comer mais saudável.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/10_MVS_EXERCICIOS_TERCEIRA_IDADE.mp4" target="_blank">10. Exercícios na terceira idade.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/11_MVS_DORMIR_MELHOR.mp4" target="_blank">11. Dormir melhor.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/12_MVS_ANSIEDADE.mp4" target="_blank">12. Ansiedade.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/13_MVS_COMER_ENTRE_REFEICOES.mp4" target="_blank">13. Comer entre as refeições.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/14_MVS_ESPIRITUALIDADE.mp4" target="_blank">14. Alimentação e espiritualidade.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/15_MVS_ALIVIAR_DORES.mp4" target="_blank">15. Como aliviar as dores.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/16_MVS_CONTROLE_EMOCIONAL.mp4" target="_blank">16. Como ter controle emocional.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/17_MVS_AGUA_VIDA.mp4" target="_blank">17. O poder da água.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/18_MVS_MIOCINAS.mp4" target="_blank">18. O que são as miocinas?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/19_MVS_MANTER_PESO.mp4" target="_blank">19. Como manter o peso?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/20_MVS_JEJUM.mp4" target="_blank">20. Os benefícios do jejum.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/21_MVS_DEPRESSAO.mp4" target="_blank">21. Como vencer a depressão.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/22_MVS_ESPIRITUAL.mp4" target="_blank">22. Do artificial para o natural.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/23_MVS_MOVIMENTO_INFANCIA.mp4" target="_blank">23. A importância do movimento na infância.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/24_MVSCONSUMO_DOCES.mp4" target="_blank">24. Como reduzir o consumo de doces.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/25_MVS_CAFEINA.mp4" target="_blank">25. A verdade sobre a cafeína.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/26_MVS_PENSAR_BEM.mp4" target="_blank">26. Pensar bem.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/27_MVS_02_11_24_MUSCULOS.mp4" target="_blank">27. Por que eu preciso de músculos.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/28_MVS_09_11_24_ESCALDA_PES.mp4" target="_blank">28. Como fazer um escalda-pés.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/29_MVS_16_11_24_LIQUIDO.mp4" target="_blank">29. Beber líquido nas refeições.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/30_MVS_23_11_24_COMPULSOES.mp4" target="_blank">30. Compulsões (341.2MB)</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/31_MVS_30_11_24_GLUTEN.mp4" target="_blank">31. Glúten faz mal?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/32_MVS_07_12_24_SONO.mp4" target="_blank">32. Coisas que atrapalham o seu sono.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/33_MVS_14_12_24_PRATO_VEGETARIANO.mp4" target="_blank">33. Prato Vegetariano - Como montar?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/34_MVS_21_12_24_PSICOSSOMATICA.mp4" target="_blank">34. Psicossomática.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/35_MVS_28_12_24_AGUA_COMO_REMEDIO.mp4" target="_blank">35. Água como remédio.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/36_MVS_04_01_25_COMER_SOJA.mp4" target="_blank">36. É seguro comer soja?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/37_MVS_11_01_25_SAUDE_INTESTINAL.mp4" target="_blank">37. Como melhorar a saúde intestinal.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/38_MVS_18_01_25_FIBRAS_MUSCULARES_P1.mp4" target="_blank">38. Fibras musculares e metabolismo - Parte 1.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2024/momento-vida-saude/39_MVS_25_01_25_FIBRAS_MUSCULARES_P2.mp4" target="_blank">39. Fibras musculares e metabolismo - Parte 2.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/fev/40_MVS_01_02_25_DIMINUIR_CARNE_DIETA_FHD.mp4" target="_blank">40. Como reduzir o consumo de carne.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/fev/41_MVS_08_02_25_DRIBLANDO_ALIMENTACAO_FHD.mp4" target="_blank">41. Driblando o que impede a alimentação saudável.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/fev/42_MVS_15_02_25_ACABANDO_DOR_FHD.mp4" target="_blank">42. Como acabar com a dor?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/fev/43_MVS_22_02_25_GORDURA_NO_FIGADO_FHD.mp4" target="_blank">43. Como acabar com gordura no fígado.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mar/44_MVS_01_03_25_MITOCONDRIAS.mp4" target="_blank">44. O papel das mitocôndrias no nosso corpo.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mar/45_MVS_08_03_25_PERDER_PESO.mp4" target="_blank">45. Como perder peso?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mar/46_MVS_15_03_25_O_LIMITE_E_O_SINTOMA.mp4" target="_blank">46. O limite é o sintoma.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mar/47_MVS_22_03_25_EMAGRECER_COM_SAUDE.mp4" target="_blank">47. Emagreça com saúde.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mar/48_MVS_29_03_25_DESCANSO_ALEM_DO_SONO.mp4" target="_blank">48. Descanso - além do sono.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/abr/49_MVS_05_04_25_CRIANCAS_ANGUSTIA.mp4" target="_blank">49. Crianças sentem angústia.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/abr/50_MVS_12_04_25_SALPIQUE_ANTIOXIDANTES.mp4" target="_blank">50. Antioxidantes: salpique saúde.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/abr/51_MVS_19_04_25_DEBITO_CARDIACO.mp4" target="_blank">51. Débito cardíaco.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/abr/52_MVS_26_04_25_ME_FAZER_FELIZ.mp4" target="_blank">52. Pode alguém me fazer feliz?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mai/53_MVS_03_05_25_COMO_COMBATER_O_CANSACO.mp4" target="_blank">53. Como combater o cansaço?</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mai/54_MVS_10_05_25_FIBRA_A_MELHOR_AMIGA.mp4" target="_blank">54. Fibra, a melhor amiga.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mai/55_MVS_17_05_25_PSICOEDUCACAO.mp4" target="_blank">55. Psicoeducação.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mai/56_MVS_24_05_25_COMO_ALIVIAR_BARRIGA_ESTUFADA.mp4" target="_blank">56. Como aliviar barriga estufada.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/mai/57_MVS_31_05_25_SUBSTITUA_SEMPRE_QUE_PUDER.mp4" target="_blank">57. Substitua sempre que puder.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/jun/58_MVS_07_06_25_PR%C3%89-DIABETES%20.mp4" target="_blank">58. Pré-Diabetes.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/jun/59_MVS_14_06_25_DOEN%C3%87A%20COMPLEXA.mp4" target="_blank">59. Doença Complexa.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/jun/60_MVS_21_06_25_%20FOR%C3%87A%20DE%20VONTADE.mp4" target="_blank">60. Força de Vontade.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/jun/61_MVS_28_06_25_%20FADIGA.mp4" target="_blank">61. Fadiga.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/jul/62_MVS_05_07_25_CENTIMETRO.mp4" target="_blank">62. Centímetro.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/jul/63_MVS_12_07_25_COZINHA%20SAUDAVEL.mp4" target="_blank">63. Cozinha Saudável.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/jul/64_MVS_19_07_25_SEDENTARISMO.mp4" target="_blank">64. Sedentarismo.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/jul/65_MVS_26_07_25_FORCA%20DE%20VONTADE.mp4" target="_blank">65. Força de Vontade.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/ago/66_MVS_02_08_25_OSSOS%20PARTE%201.mp4" target="_blank">66. Ossos - Parte 1.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/ago/67_MVS_09_08_25_OSSOS%20PARTE%202.mp4" target="_blank">67. Ossos - Parte 2.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/ago/68_MVS_16_08_25_CUIDADOS.mp4" target="_blank">68. Cuidados.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/ago/69_MVS_23_08_25_PENSAMENTO%20SADIO.mp4" target="_blank">69. Pensamento Sadio.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/ago/70_MVS_30_08_25_NAO%20PERDER%20NUTRIENTES.mp4" target="_blank">70. Não Perder Nutrientes.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/set/71_MVS_06_09_25_INTESTINO.mp4" target="_blank">71. Intestino.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/set/72_MVS_13_09_25_APRENDER%20COM%20SINTOMA.mp4" target="_blank">72. Aprender com o Sintoma.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/set/73_MVS_20_09_25_AUTOCONHECER.mp4" target="_blank">73. Autoconhecer.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/set/74_MVS_27_09_25_ALIMENTOS%20ANTI%20INFLAMATORIOS.mp4" target="_blank">74. Alimentos Anti-inflamatórios.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/out/75_MVS_04_10_25_SAUDE%20EMOCIONAL.mp4" target="_blank">75. Saúde Emocional.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/out/76_MVS_11_10_25_CRESCER%20COM%20SA%C3%9ADE.mp4" target="_blank">76. Crescer com Saúde.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/out/77_MVS_18_10_25_SEDENTARISMO%20INFANTIL.mp4" target="_blank">77. Sedentarismo Infantil.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/out/78_MVS_25_10_25_CANCER%20DE%20MAMA.mp4" target="_blank">78. Câncer de Mama.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/nov/79_MVS_01_11_25_DIFERENCAS%20NO%20CASAMENTO.mp4" target="_blank">79. Diferenças no Casamento.</a></li>
+			<li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/nov/80_MVS_08_11_25_MENOPAUSA.mp4" target="_blank">80. Menopausa.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/nov/81_MVS_15_11_25_VEGETARIANISMO.mp4" target="_blank">81. Vegetarianismo.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/saude/2025/momento-vida-saude/nov/83_MVS_29_11_25_TRABALHO%20DE%20BASE.mp4" target="_blank">82. Trabalho de Base.</a></li>
+
+        </ul>
+    </div>
+
+    <script>
+        function normalizar(txt) {
+            return txt.toLowerCase()
+                      .normalize("NFD")
+                      .replace(/[\u0300-\u036f]/g, "");
+        }
+
+        /* Debounce da busca */
+        let timeout = null;
+
+        function filtrar() {
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                const termo = normalizar(document.getElementById("search").value);
+                const itens = document.querySelectorAll("#lista li");
+
+                itens.forEach(li => {
+                    const texto = normalizar(li.textContent);
+                    li.style.display = texto.includes(termo) ? "" : "none";
+                });
+            }, 150);
+        }
+    </script>
+
+</body>
+</html>

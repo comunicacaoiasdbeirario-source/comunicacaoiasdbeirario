@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Provai e Vede 2026</title>
+
+    <style>
+        /* Variáveis CSS */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --link-color: #0056b3;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            font-size: 2em;
+            text-align: center;
+        }
+
+        /* Label acessível */
+        .sr-only {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        /* Campo de Busca */
+        #search {
+            width: 100%;
+            padding: 14px 20px 14px 45px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 1em;
+            box-sizing: border-box;
+            background: var(--card-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="%23999" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>') no-repeat 15px center;
+            background-size: 20px;
+            transition: border-color 0.3s;
+        }
+
+        #search:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        /* Grid de Cards */
+        #lista {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        /* Card */
+        li {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            line-height: 1.5;
+        }
+
+        li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Remove hover em dispositivos touch */
+        @media (hover: none) {
+            li:hover {
+                transform: none;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            display: block;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📺 Provai e Vede 2026</h1>
+
+        <!-- Label acessível -->
+        <label for="search" class="sr-only">Buscar vídeos por nome</label>
+        <input type="text" id="search" placeholder="🔍 Buscar vídeos por nome..." onkeyup="filtrar()">
+
+        <ul id="lista">
+            
+			<li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-03-26_nao-ha-orfaos-de-deus.mp4" target="_blank">1.03/Jan - Não há orfãos de Deus.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-10-26_%20primicias-de-fe.mp4" target="_blank">2. 10/Jan - Primícias de Fé.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-17-26_nosso-pai-que-esta-nos-ceus.mp4" target="_blank">3. 17/Jan - Nosso Pai que está nos Céus.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-24-26_se-o-mar-nao-abrir.mp4" target="_blank">4. 24/Jan - E se o mar não abrir?.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-31-26_liberta-em-cristo.mp4" target="_blank">5. 31/Jan - Liberta em Cristo.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-07-26_respeito-da-turma.mp4" target="_blank">6. 07/Fev - Respeito da turma.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-14-26_fidelidade-nao-e-favor.mp4" target="_blank">7. 14/Fev - Fidelidade não é favor.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-21-26_compatibilidade.mp4" target="_blank">8. 21/Fev - Compatiblidade</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-28-26_portas-fechadas-coracoes-abertos.mp4" target="_blank">9. 28/Fev - Portas fechadas, corações abertos.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-07-26_milagres-ao-redor.mp4" target="_blank">10. 07/Mar - Milagres ao redor.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-14-26_meu-cristo-meu-redentor.mp4" target="_blank">11. 14/Mar - Meu Cristo, Meu Redentor.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-21-26_mais-que-um-sabado.mp4" target="_blank">12. 21/Mar - Mais que um Sábado.</a></li>
+            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-28-26_ja-e-tarde-demais-para-voltar.mp4" target="_blank">13. 28/Mar - Já é tarde demais para voltar.</a></li>
+			
+
+        </ul>
+    </div>
+
+    <script>
+        function normalizar(txt) {
+            return txt.toLowerCase()
+                      .normalize("NFD")
+                      .replace(/[\u0300-\u036f]/g, "");
+        }
+
+        /* Debounce da busca */
+        let timeout = null;
+
+        function filtrar() {
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                const termo = normalizar(document.getElementById("search").value);
+                const itens = document.querySelectorAll("#lista li");
+
+                itens.forEach(li => {
+                    const texto = normalizar(li.textContent);
+                    li.style.display = texto.includes(termo) ? "" : "none";
+                });
+            }, 150);
+        }
+    </script>
+
+</body>
+</html>
