@@ -166,27 +166,27 @@
 
     <h2>Apps</h2>
 
-    <button class="app-btn" data-app="apps/controle_de_louvor.html">
+    <button class="app-btn" data-app-id="louvor">
         🎶 <span class="text">Gestão de Louvor</span>
     </button>
-	
-	<button class="app-btn" data-app="apps/gerenciador_de_audio.html">
-        🎧 <span class="text">Gerenciador de Aúdio e Video</span>
+
+    <button class="app-btn" data-app-id="audio">
+        🎧 <span class="text">Gerenciador de Áudio e Vídeo</span>
     </button>
-	
-	<button class="app-btn" data-app="apps/informativo_mundial_2026.html">
+
+    <button class="app-btn" data-app-id="missoes">
         🌍 <span class="text">Informativo Mundial das Missões - 2026</span>
     </button>
-	
-    <button class="app-btn" data-app="apps/momento_vida_e_saude.html">
+
+    <button class="app-btn" data-app-id="saude">
         🩺 <span class="text">Momento Vida e Saúde</span>
     </button>
-	
-    <button class="app-btn" data-app="apps/provai_e_vede_2026.html">
+
+    <button class="app-btn" data-app-id="tv">
         📺 <span class="text">Provai e Vede - 2026</span>
     </button>
 
-    <button class="app-btn" data-app="apps/slidead_vision.html">
+    <button class="app-btn" data-app-id="slides">
         🎥 <span class="text">Slide Show</span>
     </button>
 
@@ -212,23 +212,36 @@
 </div>
 
 <script>
+    // Mapa de aplicativos com caminhos ocultos
+    const APPS = {
+        louvor: "apps/a8f3k9x2.html",
+        audio: "apps/b7d2m1.html",
+        missoes: "apps/m9x2p7.html",
+        saude: "apps/s2d9a1.html",
+        tv: "apps/pv26x9.html",
+        slides: "apps/sl9d3.html"
+    };
+
     const sidebar = document.getElementById('sidebar');
     const toggleMenu = document.getElementById('toggleMenu');
     const frame = document.getElementById('appFrame');
     const placeholder = document.getElementById('placeholder');
     const loading = document.getElementById('loading');
-    const buttons = document.querySelectorAll('[data-app]');
+    const buttons = document.querySelectorAll('[data-app-id]');
     const btnFechar = document.getElementById('btnFechar');
 
+    // Alternar o menu
     toggleMenu.addEventListener('click', () => {
         sidebar.classList.toggle('collapsed');
     });
 
+    // Função para limpar os botões ativos
     function limparBotoesAtivos() {
         buttons.forEach(btn => btn.classList.remove('ativo'));
     }
 
-    function abrirApp(caminho, botao) {
+    // Função para abrir um app
+    function abrirApp(id, botao) {
         loading.style.display = 'block';
         placeholder.style.display = 'none';
 
@@ -237,9 +250,10 @@
 
         frame.classList.add('loading');
         frame.style.display = 'block';
-        frame.src = caminho + '?t=' + Date.now();
+        frame.src = APPS[id] + '?t=' + Date.now();
     }
 
+    // Função para fechar o app
     function fecharApp() {
         frame.src = '';
         frame.style.display = 'none';
@@ -249,14 +263,18 @@
         limparBotoesAtivos();
     }
 
+    // Adicionando evento de clique para os botões
     buttons.forEach(button => {
         button.addEventListener('click', () => {
-            abrirApp(button.dataset.app, button);
+            const appId = button.dataset.appId; // Pega o ID do app
+            abrirApp(appId, button); // Abre o app
         });
     });
 
+    // Fechar app
     btnFechar.addEventListener('click', fecharApp);
 
+    // Quando o iframe carregar
     frame.addEventListener('load', () => {
         loading.style.display = 'none';
         frame.classList.remove('loading');
@@ -264,7 +282,4 @@
 </script>
 
 </body>
-</html>
-
-
-
+</html>   
