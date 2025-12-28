@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Informativo Mundial das Missões 2026</title>
+    <title>Informativo Mundial das Missões 2026 - Em atualização</title>
 
     <style>
         /* Variáveis CSS */
@@ -109,6 +109,31 @@
         a:hover {
             color: var(--primary-color);
         }
+		/* RODAPÉ */
+	.footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:var(--card);
+    color:var(--text);
+    text-align:center;
+    font-size:12px;
+    padding:8px 10px;
+    border-top:1px solid rgba(0,0,0,0.15);
+    z-index:9;
+}
+.footer span{
+    display:block;
+    font-size:11px;
+    opacity:0.85;
+}
+
+/* PROJETOR */
+@media (min-width:1200px){
+    .footer{font-size:14px}
+    .footer span{font-size:12px}
+}
     </style>
 </head>
 
@@ -127,8 +152,14 @@
 
         </ul>
     </div>
-
+<!-- RODAPÉ -->
+<footer class="footer">
+    © <span id="ano"></span> Departamento de Comunicação e Mídia – IASD Beira Rio – Central
+    <span>Conteúdo de uso institucional. Reprodução não autorizada.</span>
+</footer>
     <script>
+	/* ANO AUTOMÁTICO */
+document.getElementById("ano").textContent=new Date().getFullYear();
         function normalizar(txt) {
             return txt.toLowerCase()
                       .normalize("NFD")
@@ -155,4 +186,3 @@
 
 </body>
 </html>
-
