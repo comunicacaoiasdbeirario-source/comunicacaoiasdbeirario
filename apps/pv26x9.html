@@ -3,32 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Provai e Vede 2026</title>
-
     <style>
-        /* Variáveis CSS */
         :root {
             --primary-color: #007bff;
             --secondary-color: #f8f9fa;
             --card-bg: #ffffff;
             --text-color: #333;
-            --link-color: #0056b3;
             --border-color: #ddd;
         }
 
         body {
             font-family: 'Arial', sans-serif;
+            margin: 0;
             padding: 20px;
+            padding-bottom: 80px;
             background-color: var(--secondary-color);
             color: var(--text-color);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .container {
-            width: 100%;
             max-width: 1200px;
+            margin: auto;
         }
 
         h1 {
@@ -38,7 +33,6 @@
             text-align: center;
         }
 
-        /* Label acessível */
         .sr-only {
             position: absolute;
             left: -9999px;
@@ -47,7 +41,6 @@
             overflow: hidden;
         }
 
-        /* Campo de Busca */
         #search {
             width: 100%;
             padding: 14px 20px 14px 45px;
@@ -66,7 +59,6 @@
             outline: none;
         }
 
-        /* Grid de Cards */
         #lista {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -76,14 +68,12 @@
             margin: 0;
         }
 
-        /* Card */
         li {
             background-color: var(--card-bg);
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             padding: 15px;
             transition: transform 0.2s, box-shadow 0.2s;
-            line-height: 1.5;
         }
 
         li:hover {
@@ -91,7 +81,6 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
 
-        /* Remove hover em dispositivos touch */
         @media (hover: none) {
             li:hover {
                 transform: none;
@@ -109,91 +98,104 @@
         a:hover {
             color: var(--primary-color);
         }
-	/* RODAPÉ */
-.footer{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:var(--card);
-    color:var(--text);
-    text-align:center;
-    font-size:12px;
-    padding:8px 10px;
-    border-top:1px solid rgba(0,0,0,0.15);
-    z-index:9;
-}
-.footer span{
-    display:block;
-    font-size:11px;
-    opacity:0.85;
+
+        .footer {
+    position: absolute;
+    bottom: 8px;
+    left: 15px;
+    right: 15px;
+    text-align: center;
+    font-size: 12px;
+    color: #6b7280;
+
+    white-space: nowrap; /* 🔥 impede quebra de linha */
 }
 
-/* PROJETOR */
-@media (min-width:1200px){
-    .footer{font-size:14px}
-    .footer span{font-size:12px}
-}	
+.footer span {
+    display: inline; /* 🔥 garante que fique na mesma linha */
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+        @media (min-width: 1200px) {
+            .footer { font-size: 14px; }
+            .footer span { font-size: 12px; }
+        }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>📺 Provai e Vede 2026</h1>
+<div class="container">
+    <h1>📺 Provai e Vede 2026</h1>
 
-        <!-- Label acessível -->
-        <label for="search" class="sr-only">Buscar vídeos por nome</label>
-        <input type="text" id="search" placeholder="🔍 Buscar vídeos por nome..." onkeyup="filtrar()">
+    <label for="search" class="sr-only">Buscar vídeos por nome</label>
+    <input type="text" id="search" placeholder="🔍 Buscar vídeos por nome...">
 
-        <ul id="lista">
-            
-			<li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-03-26_nao-ha-orfaos-de-deus.mp4" target="_blank">1.03/Jan - Não há orfãos de Deus.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-10-26_%20primicias-de-fe.mp4" target="_blank">2. 10/Jan - Primícias de Fé.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-17-26_nosso-pai-que-esta-nos-ceus.mp4" target="_blank">3. 17/Jan - Nosso Pai que está nos Céus.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-24-26_se-o-mar-nao-abrir.mp4" target="_blank">4. 24/Jan - E se o mar não abrir?.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-31-26_liberta-em-cristo.mp4" target="_blank">5. 31/Jan - Liberta em Cristo.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-07-26_respeito-da-turma.mp4" target="_blank">6. 07/Fev - Respeito da turma.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-14-26_fidelidade-nao-e-favor.mp4" target="_blank">7. 14/Fev - Fidelidade não é favor.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-21-26_compatibilidade.mp4" target="_blank">8. 21/Fev - Compatiblidade</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-28-26_portas-fechadas-coracoes-abertos.mp4" target="_blank">9. 28/Fev - Portas fechadas, corações abertos.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-07-26_milagres-ao-redor.mp4" target="_blank">10. 07/Mar - Milagres ao redor.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-14-26_meu-cristo-meu-redentor.mp4" target="_blank">11. 14/Mar - Meu Cristo, Meu Redentor.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-21-26_mais-que-um-sabado.mp4" target="_blank">12. 21/Mar - Mais que um Sábado.</a></li>
-            <li><a href="https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-28-26_ja-e-tarde-demais-para-voltar.mp4" target="_blank">13. 28/Mar - Já é tarde demais para voltar.</a></li>       
-		</ul>
-    </div>
+    <ul id="lista"></ul>
+</div>
+
 <footer class="footer">
     © <span id="ano"></span> Departamento de Comunicação e Mídia – IASD Beira Rio – Central
     <span>Conteúdo de uso institucional. Reprodução não autorizada.</span>
 </footer>
 
-    <script>
-	/* ANO AUTOMÁTICO */
-document.getElementById("ano").textContent=new Date().getFullYear();
-	
-	        function normalizar(txt) {
-            return txt.toLowerCase()
-                      .normalize("NFD")
-                      .replace(/[\u0300-\u036f]/g, "");
-        }
+<script>
+document.getElementById("ano").textContent = new Date().getFullYear();
 
-        /* Debounce da busca */
-        let timeout = null;
+const videos = [
+  { data:"03/Jan", titulo:"Não há órfãos de Deus", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-03-26_nao-ha-orfaos-de-deus.mp4" },
+  { data:"10/Jan", titulo:"Primícias de Fé", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-10-26_20primicias-de-fe.mp4" },
+  { data:"17/Jan", titulo:"Nosso Pai que está nos Céus", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-17-26_nosso-pai-que-esta-nos-ceus.mp4" },
+  { data:"24/Jan", titulo:"E se o mar não abrir?", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-24-26_se-o-mar-nao-abrir.mp4" },
+  { data:"31/Jan", titulo:"Liberta em Cristo", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/01-31-26_liberta-em-cristo.mp4" },
+  { data:"07/Fev", titulo:"Respeito da turma", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-07-26_respeito-da-turma.mp4" },
+  { data:"14/Fev", titulo:"Fidelidade não é favor", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-14-26_fidelidade-nao-e-favor.mp4" },
+  { data:"21/Fev", titulo:"Compatibilidade", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-21-26_compatibilidade.mp4" },
+  { data:"28/Fev", titulo:"Portas fechadas, corações abertos", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/02-28-26_portas-fechadas-coracoes-abertos.mp4" },
+  { data:"07/Mar", titulo:"Milagres ao redor", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-07-26_milagres-ao-redor.mp4" },
+  { data:"14/Mar", titulo:"Meu Cristo, Meu Redentor", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-14-26_meu-cristo-meu-redentor.mp4" },
+  { data:"21/Mar", titulo:"Mais que um Sábado", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-21-26_mais-que-um-sabado.mp4" },
+  { data:"28/Mar", titulo:"Já é tarde demais para voltar", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/03-28-26_ja-e-tarde-demais-para-voltar.mp4" },
+  { data:"04/Abr", titulo:"A razão da nossa fé", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/04-04-26_a-razao-da-nossa-fe.mp4" },
+  { data:"11/Abr", titulo:"Prescrição total: submissão", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/04-11-26_prescricao-total-submissao.mp4" },
+  { data:"18/Abr", titulo:"O valor de cada passo", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/04-18-26_o-valor-de-cada-passo.mp4" },
+  { data:"25/Abr", titulo:"O valor da palavra", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/04-25-26_o-valor-da-palavra.mp4" },
+  { data:"02/Mai", titulo:"O mercado da fidelidade", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/05-02-26_o-mercado-da-fidelidade.mp4" },
+  { data:"09/Mai", titulo:"Nem praga alguma chegará", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/05-09-26_nem-praga-alguma-chegara.mp4" },
+  { data:"16/Mai", titulo:"Minha pequenina luz", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/05-16-26_minha-pequenina-luz.mp4" },
+  { data:"23/Mai", titulo:"Remédio para a alma", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/05-23-26_remedio-para-a-alma.mp4" },
+  { data:"30/Mai", titulo:"Haja coração", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/05-30-26_haja-coracao.mp4" },
+  { data:"06/Jun", titulo:"Pagar pra ver", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/06-06-26_pagar-pra-ver.mp4" },
+  { data:"13/Jun", titulo:"Receita para um lar feliz", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/06-13-26_receita-para-um-lar-feliz.mp4" },
+  { data:"20/Jun", titulo:"Cara ou coroa", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/06-20-26_cara-ou-coroa.mp4" },
+  { data:"27/Jun", titulo:"Mission Refocus", url:"https://f000.backblazeb2.com/file/deptos/mordomia/provai-e-vede/2026/episodios/06-27-26_mission-refocus.mp4" }
+];
 
-        function filtrar() {
-            clearTimeout(timeout);
+function normalizar(txt) {
+    return txt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
-            timeout = setTimeout(() => {
-                const termo = normalizar(document.getElementById("search").value);
-                const itens = document.querySelectorAll("#lista li");
+const lista = document.getElementById("lista");
+function render(videosFiltrados) {
+    lista.innerHTML = "";
+    videosFiltrados.forEach((video, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${video.url}" target="_blank" rel="noopener noreferrer">${index + 1}. ${video.data} - ${video.titulo}</a>`;
+        lista.appendChild(li);
+    });
+}
 
-                itens.forEach(li => {
-                    const texto = normalizar(li.textContent);
-                    li.style.display = texto.includes(termo) ? "" : "none";
-                });
-            }, 150);
-        }
-    </script>
+const searchInput = document.getElementById("search");
+let timeout;
+searchInput.addEventListener("input", () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        const termo = normalizar(searchInput.value);
+        const filtrados = videos.filter(v => normalizar(v.titulo).includes(termo));
+        render(filtrados);
+    }, 150);
+});
 
+render(videos);
+</script>
 </body>
 </html>
