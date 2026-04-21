@@ -1,292 +1,300 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Gerenciador de Áudios e Vídeos</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: #f0f0f0;
-      margin: 0;
-      padding: 20px;
-    }
+<meta charset="UTF-8">
+<title>Gerenciador de Áudios e Vídeos</title>
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    #folderInput {
-      display: block;
-      margin: 0 auto 30px auto;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 6px;
-      background-color: #1f1f1f;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    #folderInput:hover {
-      background-color: #333;
-    }
-
-    #mediaContainer {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .media-item {
-      position: relative;
-      animation: fadeIn 0.8s ease forwards;
-      opacity: 0;
-    }
-
-    video, audio {
-      width: 100%;
-      border-radius: 8px;
-      outline: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease;
-    }
-
-    video:hover, audio:hover {
-      transform: scale(1.03);
-    }
-
-    p {
-      margin: 10px 0 5px 0;
-      font-weight: bold;
-      color: #ccc;
-    }
-
-    .open-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      padding: 6px 10px;
-      cursor: pointer;
-      font-size: 12px;
-      z-index: 2;
-      transition: background 0.3s ease;
-    }
-
-    .open-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Modal Styles */
-    #modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      justify-content: center;
-      align-items: center;
-    }
-
-    #modal video {
-      width: 80%;
-      max-height: 90vh;
-    }
-
-    #modal.closeable {
-      cursor: pointer;
-    }
-
-    @keyframes fadeIn {
-      from {
-        transform: translateY(10px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-	/* RODAPÉ */
-.footer{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:var(--card);
-    color:var(--text);
-    text-align:center;
-    font-size:12px;
-    padding:8px 10px;
-    border-top:1px solid rgba(0,0,0,0.15);
-    z-index:9;
-}
-.footer span{
-    display:block;
-    font-size:11px;
-    opacity:0.85;
+<style>
+body{
+  font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  background:#f5f5f5;
+  color:#1f1f1f;
+  margin:0;
+  padding:20px;
 }
 
-/* PROJETOR */
-@media (min-width:1200px){
-    .footer{font-size:14px}
-    .footer span{font-size:12px}
+h2{text-align:center;margin-bottom:20px;}
+
+#folderInput{
+  display:block;
+  margin:0 auto 30px;
+  padding:12px 20px;
+  border:1px solid #ddd;
+  border-radius:6px;
+  background:#ffffff;
+  color:#1f1f1f;
+  font-size:16px;
+  cursor:pointer;
 }
-  </style>
+
+#mediaContainer{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+.media-item{
+  position:relative;
+  animation:fadeIn .8s forwards;
+  opacity:0;
+  background:#fff;
+  padding:10px;
+  border-radius:8px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+video,audio{
+  width:100%;
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+/* MODAL */
+#modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+#modal video{width:80%;max-height:90vh;}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* RODAPÉ */
+.footer {
+    position: absolute;
+    bottom: 8px;
+    left: 15px;
+    right: 15px;
+    text-align: center;
+    font-size: 12px;
+    color: #6b7280;
+
+    white-space: nowrap; /* 🔥 impede quebra de linha */
+}
+
+.footer span {
+    display: inline; /* 🔥 garante que fique na mesma linha */
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* MENU */
+.dropdown{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:50;
+}
+
+.dropdown-button{
+  background:#ffffff;
+  color:#1f1f1f;
+  border:1px solid #ddd;
+  padding:10px 14px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  top:45px;
+  right:0;
+  background:#ffffff;
+  border-radius:6px;
+  min-width:200px;
+  box-shadow:0 6px 16px rgba(0,0,0,.2);
+}
+
+.dropdown-content a{
+  display:block;
+  padding:10px 14px;
+  color:#1f1f1f;
+  text-decoration:none;
+  font-size:13px;
+}
+
+.dropdown-content a:hover{
+  background:#f0f0f0;
+}
+
+.dropdown.show .dropdown-content{
+  display:block;
+}
+</style>
 </head>
-<body>
-  <h2>🎵 Gerenciador de Áudio e Vídeo 🎬</h2>
-  <input type="file" id="folderInput" webkitdirectory directory multiple>
-  <div id="mediaContainer"></div>
 
-  <!-- Modal for fullscreen video preview -->
-  <div id="modal">
-    <video id="modalVideo" controls></video>
+<body>
+
+<h2>🎵 Gerenciador de Áudio e Vídeo 🎬</h2>
+
+<!-- 🔥 CORREÇÃO PRINCIPAL AQUI -->
+<input type="file" id="folderInput" multiple>
+
+<div id="mediaContainer"></div>
+
+<!-- MODAL -->
+<div id="modal">
+  <video id="modalVideo" controls></video>
+</div>
+
+<!-- MENU -->
+<div class="dropdown" id="dropdownMenu">
+  <button class="dropdown-button">☰ Menu</button>
+  <div class="dropdown-content">
+    <a href="#" id="addFileBtn">➕ Adicionar arquivo</a>
+    <a href="#" id="clearMediaBtn">🗑️ Limpar tudo</a>
+    <a href="#">🎞️ Somente vídeos</a>
+    <a href="#">🎧 Somente áudios</a>
+   <!--  <a href="#">ℹ️ Sobre</a> -->
   </div>
-  
-<!-- RODAPÉ -->
+</div>
+
+<input type="file" id="menuFileInput" multiple style="display:none">
+
 <footer class="footer">
     © <span id="ano"></span> Departamento de Comunicação e Mídia – IASD Beira Rio – Central
     <span>Conteúdo de uso institucional. Reprodução não autorizada.</span>
 </footer>
 
-  <script>
-    const folderInput = document.getElementById('folderInput');
-    const mediaContainer = document.getElementById('mediaContainer');
-    const modal = document.getElementById('modal');
-    const modalVideo = document.getElementById('modalVideo');
-	
-/* ANO AUTOMÁTICO */
-document.getElementById("ano").textContent=new Date().getFullYear();
+<script>
+document.getElementById("ano").textContent = new Date().getFullYear();
 
-    folderInput.addEventListener('change', (event) => {
-      const files = Array.from(event.target.files);
-      mediaContainer.innerHTML = ''; // Limpa antes
+const mediaContainer = document.getElementById("mediaContainer");
+const modal = document.getElementById("modal");
+const modalVideo = document.getElementById("modalVideo");
+const folderInput = document.getElementById("folderInput");
+const menuFileInput = document.getElementById("menuFileInput");
+const dropdown = document.getElementById("dropdownMenu");
 
-      const allowedTypes = ['video/mp4', 'video/webm', 'audio/mpeg', 'audio/ogg', 'audio/wav'];
+const activeUrls = new Set();
 
-      files.forEach(file => {
-        if (!allowedTypes.includes(file.type)) return;
+/* VALIDAÇÃO */
+function isValidMedia(file){
+  return file.type.startsWith("video") || file.type.startsWith("audio");
+}
 
-        const url = URL.createObjectURL(file);
-        let element;
+/* ADD ARQUIVO */
+function addFile(file){
+  if(!isValidMedia(file)) return;
 
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('media-item');
+  const url = URL.createObjectURL(file);
+  activeUrls.add(url);
 
-        const label = document.createElement('p');
-        label.textContent = file.name;
+  const wrap = document.createElement("div");
+  wrap.className = "media-item";
+  wrap.dataset.url = url;
 
-        if (file.type.startsWith('video')) {
-          element = document.createElement('video');
-          element.controls = true;
-          element.src = url;
+  const label = document.createElement("p");
+  label.textContent = file.name;
 
-          // Botão de abrir em nova guia
-          const openBtn = document.createElement('button');
-          openBtn.className = 'open-button';
-          openBtn.textContent = 'Abrir em nova aba';
-          openBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita conflito com modal
-            const newWindow = window.open('', '_blank');
-            if (newWindow) {
-              const htmlContent = `
-                <!DOCTYPE html>
-                <html lang="pt-BR">
-                <head>
-                  <meta charset="UTF-8">
-                  <title>${file.name}</title>
-                  <style>
-                    body {
-                      margin: 0;
-                      background: #000;
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                      height: 100vh;
-                    }
-                    video {
-                      width: 100%;
-                      height: auto;
-                    }
-                  </style>
-                </head>
-                <body>
-                  <video src="${url}" autoplay controls></video>
-                </body>
-                </html>
-              `;
-              newWindow.document.write(htmlContent);
-              newWindow.document.close();
-            }
-          });
+  let media;
 
-          // Clicar no vídeo abre modal
-          element.addEventListener('click', () => {
-            modalVideo.src = url;
-            modal.style.display = 'flex';
-            modalVideo.play();
-            modal.focus();
-          });
+  if(file.type.startsWith("video")){
+    media = document.createElement("video");
+    media.controls = true;
+    media.src = url;
 
-          wrapper.appendChild(label);
-          wrapper.appendChild(openBtn);
-          wrapper.appendChild(element);
-        } else if (file.type.startsWith('audio')) {
-          element = document.createElement('audio');
-          element.controls = true;
-          element.src = url;
-          wrapper.appendChild(label);
-          wrapper.appendChild(element);
-        }
-
-        if (element) {
-          mediaContainer.appendChild(wrapper);
-        }
-      });
+    media.addEventListener("click", () => {
+      modalVideo.src = url;
+      modal.style.display = "flex";
+      modalVideo.play();
     });
 
-    // Fecha o modal ao clicar fora do vídeo
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        modalVideo.pause();
-        modalVideo.src = '';
-      }
-    });
+  } else {
+    media = document.createElement("audio");
+    media.controls = true;
+    media.src = url;
+  }
 
-    // Atalhos no modal
-    document.addEventListener('keydown', (e) => {
-      if (modal.style.display === 'flex') {
-        if (e.key === 'Escape') {
-          modal.style.display = 'none';
-          modalVideo.pause();
-          modalVideo.src = '';
-        } else if (e.key === 'f') {
-          if (!document.fullscreenElement) {
-            modal.requestFullscreen();
-          } else {
-            document.exitFullscreen();
-          }
-        } else if (e.key === ' ') {
-          e.preventDefault();
-          if (modalVideo.paused) {
-            modalVideo.play();
-          } else {
-            modalVideo.pause();
-          }
-        }
-      }
-    });
-  </script>
+  wrap.appendChild(label);
+  wrap.appendChild(media);
+
+  mediaContainer.appendChild(wrap);
+}
+
+/* SUPORTE A ARQUIVO OU PASTA */
+folderInput.addEventListener("change", e => {
+  clearMedia(false);
+  [...e.target.files].forEach(addFile);
+});
+
+/* MODAL CLOSE */
+function closeModal(){
+  modal.style.display = "none";
+  modalVideo.pause();
+  modalVideo.src = "";
+  modalVideo.load();
+}
+
+modal.addEventListener("click", e => {
+  if(e.target === modal){
+    closeModal();
+  }
+});
+
+document.addEventListener("keydown", e=>{
+  if(e.key === "Escape"){
+    closeModal();
+  }
+});
+
+/* MENU */
+dropdown.querySelector(".dropdown-button")
+.addEventListener("click", e=>{
+  e.stopPropagation();
+  dropdown.classList.toggle("show");
+});
+
+document.addEventListener("click", () => {
+  dropdown.classList.remove("show");
+});
+
+/* ADD MENU */
+document.getElementById("addFileBtn")
+.addEventListener("click", e=>{
+  e.preventDefault();
+  menuFileInput.click();
+});
+
+menuFileInput.addEventListener("change", e=>{
+  [...e.target.files].forEach(addFile);
+  menuFileInput.value = "";
+});
+
+/* LIMPAR */
+function clearMedia(showConfirm = true){
+  if(showConfirm){
+    const ok = confirm("Tem certeza que deseja limpar tudo?");
+    if(!ok) return;
+  }
+
+  document.querySelectorAll(".media-item").forEach(el=>{
+    const url = el.dataset.url;
+    if(url){
+      URL.revokeObjectURL(url);
+      activeUrls.delete(url);
+    }
+  });
+
+  mediaContainer.innerHTML = "";
+  closeModal();
+}
+
+document.getElementById("clearMediaBtn")
+.addEventListener("click", e=>{
+  e.preventDefault();
+  clearMedia(true);
+});
+</script>
+
 </body>
 </html>
