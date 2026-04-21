@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Momento Vida e Saúde</title>
+    <title>Momento Vida e Saúde (Cards 3 Colunas)</title>
 
     <style>
         /* Variáveis CSS */
@@ -109,24 +109,23 @@
         a:hover {
             color: var(--primary-color);
         }
-			/* RODAPÉ */
-	.footer{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:var(--card);
-    color:var(--text);
-    text-align:center;
-    font-size:12px;
-    padding:8px 10px;
-    border-top:1px solid rgba(0,0,0,0.15);
-    z-index:9;
+/* RODAPÉ */
+.footer {
+    position: absolute;
+    bottom: 8px;
+    left: 15px;
+    right: 15px;
+    text-align: center;
+    font-size: 12px;
+    color: #6b7280;
+
+    white-space: nowrap; /* 🔥 impede quebra de linha */
 }
-.footer span{
-    display:block;
-    font-size:11px;
-    opacity:0.85;
+
+.footer span {
+    display: inline; /* 🔥 garante que fique na mesma linha */
+    font-size: 12px;
+    opacity: 0.8;
 }
 
 /* PROJETOR */
@@ -265,5 +264,6 @@ document.getElementById("ano").textContent=new Date().getFullYear();
             }, 150);
         }
     </script>
+
 </body>
 </html>
