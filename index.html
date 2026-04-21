@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>Painel Administrativo</title>
 
 <style>
 * {
@@ -44,7 +44,7 @@ body {
 
 .sidebar h2 {
     text-align: center;
-    margin: 10px 0 20px;
+    margin: 15px 0 20px;
     font-size: 16px;
     white-space: nowrap;
 }
@@ -100,18 +100,32 @@ body {
     overflow: hidden;
 }
 
+/* 🔥 CENTRALIZAÇÃO DO WELCOME */
+.placeholder{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.placeholder h2{
+    margin-bottom: 8px;
+    font-size: 22px;
+}
+
+.placeholder p{
+    margin: 0;
+    color: #666;
+}
+
+/* iframe */
 iframe {
     width: 100%;
     height: 100%;
     border: 1px solid #ccc;
     display: none;
     background: #fff;
-}
-
-.placeholder {
-    text-align: center;
-    color: #666;
-    margin-top: 80px;
 }
 
 /* ===== LOADING ===== */
@@ -147,12 +161,13 @@ iframe {
     text-align: center;
     font-size: 12px;
     color: #6b7280;
-    pointer-events: none;
+
+    white-space: nowrap; /* 🔥 impede quebra de linha */
 }
 
 .footer span {
-    display: block;
-    font-size: 11px;
+    display: inline; /* 🔥 garante que fique na mesma linha */
+    font-size: 12px;
     opacity: 0.8;
 }
 </style>
@@ -178,6 +193,7 @@ iframe {
 <!-- CONTEÚDO -->
 <div class="content">
 
+    <!-- 🔥 CENTRALIZADO -->
     <div id="placeholder" class="placeholder">
         <h2>Bem-vindo</h2>
         <p>Selecione um aplicativo no menu ao lado.</p>
@@ -190,10 +206,9 @@ iframe {
 
     <iframe id="appFrame"></iframe>
 
-    <!-- RODAPÉ -->
     <footer class="footer" id="footer">
-        © <span id="ano"></span> Departamento de Comunicação e Mídia – IASD Beira Rio – Central
-        <span>Conteúdo de uso institucional. Reprodução não autorizada.</span>
+       © <span id="ano"></span> Departamento de Comunicação e Mídia – IASD Beira Rio – Central
+    <span>Conteúdo de uso institucional. Reprodução não autorizada.</span>
     </footer>
 
 </div>
@@ -217,8 +232,9 @@ const buttons = document.querySelectorAll('[data-app-id]');
 const btnFechar = document.getElementById('btnFechar');
 const footer = document.getElementById('footer');
 
-/* Ano automático */
 document.getElementById("ano").textContent = new Date().getFullYear();
+
+let loadingTimeout = null;
 
 toggleMenu.onclick = () => sidebar.classList.toggle('collapsed');
 
@@ -235,11 +251,17 @@ function abrirApp(id, botao) {
     botao.classList.add('ativo');
 
     frame.style.display = 'block';
+
+    clearTimeout(loadingTimeout);
+    loadingTimeout = setTimeout(() => {
+        loading.style.display = 'none';
+    }, 8000);
+
     frame.src = APPS[id] + '?t=' + Date.now();
 }
 
 function fecharApp() {
-    frame.src = '';
+    frame.src = "about:blank";
     frame.style.display = 'none';
     loading.style.display = 'none';
     placeholder.style.display = 'block';
@@ -253,7 +275,11 @@ buttons.forEach(button => {
 
 btnFechar.onclick = fecharApp;
 
-frame.onload = () => loading.style.display = 'none';
+frame.onload = () => {
+    loading.style.display = 'none';
+    clearTimeout(loadingTimeout);
+};
 </script>
+
 </body>
 </html>
